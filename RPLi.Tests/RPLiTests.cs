@@ -13,4 +13,10 @@ public class RPLiTests
     {
         RPLi.Render("a<#--c-->b").ShouldBe("ab");
     }
+
+    [Fact]
+    public void SupportsInterpolations()
+    {
+        RPLi.Render("${\"a\"}").ShouldBe("a");
+    }
 }
