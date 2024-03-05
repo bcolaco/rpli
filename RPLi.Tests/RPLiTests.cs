@@ -7,4 +7,10 @@ public class RPLiTests
     {
         RPLi.Render("a").ShouldBe("a");
     }
+
+    [Fact]
+    public void IgnoresComments()
+    {
+        RPLi.Render("a<#--c-->b").ShouldBe("ab");
+    }
 }
