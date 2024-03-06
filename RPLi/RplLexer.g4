@@ -15,6 +15,8 @@ SQS_CONTENT : (~[\\$'])+;
 
 mode EXPR_MODE;
 EXPR_ASSIGN           : 'assign';
+EXPR_FALSE            : 'false';
+EXPR_TRUE             : 'true';
 EXPR_EXIT_R_BRACE     : '}' -> popMode;
 EXPR_DOUBLE_STR_START : '"' -> pushMode(DOUBLE_QUOTE_STRING_MODE);
 EXPR_SINGLE_STR_START : '\'' -> pushMode(SINGLE_QUOTE_STRING_MODE);

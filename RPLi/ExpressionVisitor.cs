@@ -32,6 +32,16 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
         return new Number(double.Parse(context.GetText()));
     }
 
+    public override Value VisitBoolean([NotNull] RplParser.BooleanContext context)
+    {
+        return context.GetText() switch
+        {
+            "true" => new Boolean(true),
+            "false" => new Boolean(false),
+            _ => throw new NotImplementedException(),
+        };
+    }
+
     public override Value VisitAddExpression([NotNull] RplParser.AddExpressionContext context)
     {
         var leftExpression = this.Visit(context.expression()[0]);

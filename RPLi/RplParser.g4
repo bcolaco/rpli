@@ -21,10 +21,13 @@ string
 
 number: (EXPR_ADD | EXPR_SUBTRACT)? EXPR_NUMBER;
 
+boolean: EXPR_TRUE | EXPR_FALSE;
+
 expression
     : number      # NumberExpression
     | EXPR_SYMBOL # SymbolExpression
     | string      # StringExpression
+    | boolean     # BooleanExpression
     | expression EXPR_ADD expression      # AddExpression
     | expression EXPR_SUBTRACT expression # SubtractExpression
     | expression EXPR_MULTIPLY expression # MultiplyExpression
