@@ -1,24 +1,20 @@
 namespace RPLi;
 
 using System.Text.RegularExpressions;
+using Antlr4.Runtime;
+using Lextm.AnsiC;
 
 public class RPLi
 {
     public static string Render(string rpl)
     {
-        rpl = RemoveComments(rpl);
-        rpl = ReplaceInterpolations(rpl);
+        var inputStream = new AntlrInputStream(rpl);
+        var lexer = new RplLexer(inputStream);
+        var tokenStream = new CommonTokenStream(lexer);
+        var parser = new RplParser(tokenStream);
+        var visitor = new Visitor();
+        rpl = visitor.Visit(parser.template());
 
         return rpl;
-    }
-
-    private static string RemoveComments(string rpl)
-    {
-        return Regex.Replace(rpl, "<#--.*-->", string.Empty);
-    }
-
-    private static string ReplaceInterpolations(string rpl)
-    {
-        return Regex.Replace(rpl, @"\${""(.*)""}", "$1");
     }
 }

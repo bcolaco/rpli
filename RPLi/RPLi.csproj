@@ -7,4 +7,20 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
+    <PackageReference Include="Antlr4BuildTasks" Version="12.8.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Antlr4 Include="RplLexer.g4" />
+    <Antlr4 Include="RplParser.g4">
+      <Error>true</Error>
+      <Listener>false</Listener>
+      <Visitor>true</Visitor>
+      <Package>Lextm.AnsiC</Package>
+      <JavaExec>PATH</JavaExec>
+    </Antlr4>
+  </ItemGroup>
+
 </Project>
