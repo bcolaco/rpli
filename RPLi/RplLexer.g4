@@ -19,6 +19,7 @@ EXPR_SINGLE_STR_START : '\'' -> pushMode(SINGLE_QUOTE_STRING_MODE);
 EXPR_ADD              : '+';
 EXPR_SUBTRACT         : '-';
 EXPR_MULTIPLY         : '*';
+EXPR_DIVIDE           : '/';
 EXPR_NUMBER           : NUMBER;
 EXPR_SYMBOL           : SYMBOL;
 

@@ -20,6 +20,7 @@ expression
     | expression EXPR_ADD expression      # AddExpression
     | expression EXPR_SUBTRACT expression # SubtractExpression
     | expression EXPR_MULTIPLY expression # MultiplyExpression
+    | expression EXPR_DIVIDE expression   # DivideExpression
     ;
 
 single_quote_string : EXPR_SINGLE_STR_START SQS_CONTENT SQS_EXIT;
