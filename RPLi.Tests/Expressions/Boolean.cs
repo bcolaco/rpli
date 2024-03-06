@@ -31,4 +31,14 @@ public class Boolean
 
         ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(false);
     }
+
+    [Fact]
+    public void Or()
+    {
+        var ns = new Dictionary<string, Value>();
+
+        RPLi.Render("<#assign v = true || false>", ns);
+
+        ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
+    }
 }

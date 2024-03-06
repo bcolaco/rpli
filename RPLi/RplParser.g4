@@ -34,6 +34,7 @@ expression
     | expression EXPR_DIVIDE expression       # DivideExpression
     | expression EXPR_MODULUS expression      # ModulusExpression
     | expression EXPR_LOGICAL_AND expression  # LogicalAndExpression
+    | expression EXPR_LOGICAL_OR expression   # LogicalOrExpression
     ;
 
 single_quote_string : EXPR_SINGLE_STR_START SQS_CONTENT SQS_EXIT;

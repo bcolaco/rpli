@@ -11,4 +11,9 @@ public record Boolean(bool Value) : Value
     {
         return new Boolean(this.Value && operand.Value);
     }
+
+    public Boolean Or(Boolean operand)
+    {
+        return new Boolean(this.Value || operand.Value);
+    }
 }

@@ -90,6 +90,14 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
         return left.And(right);
     }
 
+    public override Value VisitLogicalOrExpression([NotNull] RplParser.LogicalOrExpressionContext context)
+    {
+        var left = this.GetValue<Boolean>(context.expression()[0]);
+        var right = this.GetValue<Boolean>(context.expression()[1]);
+
+        return left.Or(right);
+    }
+
     private T GetValue<T>(RplParser.ExpressionContext context)
         where T: Value
     {
