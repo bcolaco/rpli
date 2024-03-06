@@ -19,4 +19,16 @@ public class Aritmetic
     {
         RPLi.Render("${2*3}").ShouldBe("6");
     }
+
+    [Fact]
+    public void CanDivideNumbers()
+    {
+        RPLi.Render("${3/2}").ShouldBe("1.5");
+    }
+
+    [Fact]
+    public void CanCalculateModulusNumbers()
+    {
+        RPLi.Render("${3%2}").ShouldBe("1");
+    }
 }

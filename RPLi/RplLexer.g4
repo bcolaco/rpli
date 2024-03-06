@@ -20,6 +20,7 @@ EXPR_ADD              : '+';
 EXPR_SUBTRACT         : '-';
 EXPR_MULTIPLY         : '*';
 EXPR_DIVIDE           : '/';
+EXPR_MODULUS          : '%';
 EXPR_NUMBER           : NUMBER;
 EXPR_SYMBOL           : SYMBOL;
 
