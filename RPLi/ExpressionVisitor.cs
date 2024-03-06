@@ -1,6 +1,6 @@
 namespace RPLi;
 
-using System.Diagnostics.CodeAnalysis;
+using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using Lextm.AnsiC;
 
@@ -18,8 +18,6 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
     {
         switch(node.Symbol.Type)
         {
-            case RplLexer.EXPR_NUMBER:
-                return new Number(double.Parse(node.GetText()));
             case RplLexer.EXPR_SYMBOL:
             case RplLexer.DQS_CONTENT:
             case RplLexer.SQS_CONTENT:
@@ -29,7 +27,10 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
         };
     }
 
-
+    public override Value VisitNumber([NotNull] RplParser.NumberContext context)
+    {
+        return new Number(double.Parse(context.GetText()));
+    }
 
     public override Value VisitAddExpression([NotNull] RplParser.AddExpressionContext context)
     {

@@ -19,8 +19,10 @@ string
     | double_quote_string # DoubleQuote
     ;
 
+number: (EXPR_ADD | EXPR_SUBTRACT)? EXPR_NUMBER;
+
 expression
-    : EXPR_NUMBER # NumberExpression
+    : number      # NumberExpression
     | EXPR_SYMBOL # SymbolExpression
     | string      # StringExpression
     | expression EXPR_ADD expression      # AddExpression
