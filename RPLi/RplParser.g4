@@ -17,7 +17,8 @@ expression
     : EXPR_NUMBER # NumberExpression
     | EXPR_SYMBOL # SymbolExpression
     | string      # StringExpression
-    | expression EXPR_ADD expression # AddExpression
+    | expression EXPR_ADD expression      # AddExpression
+    | expression EXPR_SUBTRACT expression # SubtractExpression
     ;
 
 single_quote_string : EXPR_SINGLE_STR_START SQS_CONTENT SQS_EXIT;
