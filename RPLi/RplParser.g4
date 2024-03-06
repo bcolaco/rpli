@@ -19,6 +19,7 @@ expression
     | string      # StringExpression
     | expression EXPR_ADD expression      # AddExpression
     | expression EXPR_SUBTRACT expression # SubtractExpression
+    | expression EXPR_MULTIPLY expression # MultiplyExpression
     ;
 
 single_quote_string : EXPR_SINGLE_STR_START SQS_CONTENT SQS_EXIT;

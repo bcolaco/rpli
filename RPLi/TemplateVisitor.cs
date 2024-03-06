@@ -41,4 +41,12 @@ class TempalteVisitor : RplParserBaseVisitor<string>
 
         return leftExpression.Subtract(rightExpression).ToString() ?? string.Empty;
     }
+
+    public override string VisitMultiplyExpression([NotNull] RplParser.MultiplyExpressionContext context)
+    {
+        var leftExpression = new Number(double.Parse(context.expression()[0].GetText()));
+        var rightExpression = new Number(double.Parse(context.expression()[1].GetText()));
+
+        return leftExpression.Multiply(rightExpression).ToString() ?? string.Empty;
+    }
 }

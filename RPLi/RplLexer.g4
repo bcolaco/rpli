@@ -18,6 +18,7 @@ EXPR_DOUBLE_STR_START : '"' -> pushMode(DOUBLE_QUOTE_STRING_MODE);
 EXPR_SINGLE_STR_START : '\'' -> pushMode(SINGLE_QUOTE_STRING_MODE);
 EXPR_ADD              : '+';
 EXPR_SUBTRACT         : '-';
+EXPR_MULTIPLY         : '*';
 EXPR_NUMBER           : NUMBER;
 EXPR_SYMBOL           : SYMBOL;
 
