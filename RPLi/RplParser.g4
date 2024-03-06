@@ -6,8 +6,13 @@ template: element* EOF;
 
 element
     : CONTENT+                                         # ContentElement
+    | directive                                        # DirectiveElement
     | INTERPOLATION_START expression EXPR_EXIT_R_BRACE # ExpressionElement
     ;
+
+directive: directiveAssign;
+
+directiveAssign: START_DIRECTIVE_TAG EXPR_ASSIGN EXPR_SYMBOL EXPR_EQ expression EXPR_EXIT_DIV_GT;
 
 string
     : single_quote_string # SingleQuote

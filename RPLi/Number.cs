@@ -1,6 +1,6 @@
 namespace RPLi;
 
-record Number(double Value) : Value
+public record Number(double Value) : Value
 {
     public Value Add(Value addend)
     {
