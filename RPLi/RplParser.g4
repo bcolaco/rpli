@@ -6,17 +6,18 @@ template: element* EOF;
 
 element
     : CONTENT+
-    | INTERPOLATION_START inlineExpr EXPR_EXIT_R_BRACE;
+    | INTERPOLATION_START expression EXPR_EXIT_R_BRACE;
 
 string
     : single_quote_string # SingleQuote
     | double_quote_string # DoubleQuote
     ;
 
-inlineExpr
+expression
     : EXPR_NUMBER # NumberExpression
     | EXPR_SYMBOL # SymbolExpression
     | string      # StringExpression
+    | expression EXPR_ADD expression # AddExpression
     ;
 
 single_quote_string : EXPR_SINGLE_STR_START SQS_CONTENT SQS_EXIT;

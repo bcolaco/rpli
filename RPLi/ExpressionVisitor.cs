@@ -1,16 +1,10 @@
-using Antlr4.Runtime.Misc;
+namespace RPLi;
+
 using Antlr4.Runtime.Tree;
 using Lextm.AnsiC;
 
-namespace RPLi;
-
-class Visitor : RplParserBaseVisitor<string>
+class ExpressionVisitor : RplParserBaseVisitor<string>
 {
-    protected override string AggregateResult(string aggregate, string nextResult)
-    {
-        return string.Concat(aggregate, nextResult);
-    }
-
     public override string VisitTerminal(ITerminalNode node)
     {
         switch(node.Symbol.Type)

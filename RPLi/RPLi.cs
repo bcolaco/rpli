@@ -12,7 +12,7 @@ public class RPLi
         var lexer = new RplLexer(inputStream);
         var tokenStream = new CommonTokenStream(lexer);
         var parser = new RplParser(tokenStream);
-        var visitor = new Visitor();
+        var visitor = new TempalteVisitor();
         rpl = visitor.Visit(parser.template());
 
         return rpl;
