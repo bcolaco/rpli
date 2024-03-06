@@ -6,11 +6,6 @@ namespace RPLi;
 
 class Visitor : RplParserBaseVisitor<string>
 {
-    public override string VisitTemplate([NotNull] RplParser.TemplateContext context)
-    {
-        return base.VisitTemplate(context);
-    }
-
     protected override string AggregateResult(string aggregate, string nextResult)
     {
         return string.Concat(aggregate, nextResult);
@@ -18,11 +13,15 @@ class Visitor : RplParserBaseVisitor<string>
 
     public override string VisitTerminal(ITerminalNode node)
     {
-        return node.Symbol.Type switch
+        switch(node.Symbol.Type)
         {
-            RplLexer.CONTENT => node.GetText(),
-            RplLexer.EXPR_SYMBOL => node.GetText(),
-            _ => base.VisitTerminal(node),
+            case RplLexer.CONTENT:
+            case RplLexer.EXPR_SYMBOL:
+            case RplLexer.DQS_CONTENT:
+            case RplLexer.SQS_CONTENT:
+                return node.GetText();
+            default:
+                return base.VisitTerminal(node);
         };
     }
 }
