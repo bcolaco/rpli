@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace RPLi;
 
 record Number(double Value) : Value

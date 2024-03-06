@@ -5,8 +5,9 @@ options { tokenVocab=RplLexer; }
 template: element* EOF;
 
 element
-    : CONTENT+
-    | INTERPOLATION_START expression EXPR_EXIT_R_BRACE;
+    : CONTENT+                                         # ContentElement
+    | INTERPOLATION_START expression EXPR_EXIT_R_BRACE # ExpressionElement
+    ;
 
 string
     : single_quote_string # SingleQuote

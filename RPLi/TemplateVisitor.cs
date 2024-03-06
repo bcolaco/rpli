@@ -6,6 +6,8 @@ using Lextm.AnsiC;
 
 class TempalteVisitor : RplParserBaseVisitor<string>
 {
+    private readonly ExpressionVisitor expressionVisitor = new ExpressionVisitor();
+    
     protected override string AggregateResult(string aggregate, string nextResult)
     {
         return string.Concat(aggregate, nextResult);
@@ -16,53 +18,14 @@ class TempalteVisitor : RplParserBaseVisitor<string>
         switch(node.Symbol.Type)
         {
             case RplLexer.CONTENT:
-            case RplLexer.EXPR_NUMBER:
-            case RplLexer.EXPR_SYMBOL:
-            case RplLexer.DQS_CONTENT:
-            case RplLexer.SQS_CONTENT:
                 return node.GetText();
             default:
                 return base.VisitTerminal(node);
         };
     }
 
-    public override string VisitAddExpression([NotNull] RplParser.AddExpressionContext context)
+    public override string VisitExpressionElement([NotNull] RplParser.ExpressionElementContext context)
     {
-        var leftExpression = new Number(double.Parse(context.expression()[0].GetText()));
-        var rightExpression = new Number(double.Parse(context.expression()[1].GetText()));
-
-        return leftExpression.Add(rightExpression).ToString() ?? string.Empty;
-    }
-
-    public override string VisitSubtractExpression([NotNull] RplParser.SubtractExpressionContext context)
-    {
-        var leftExpression = new Number(double.Parse(context.expression()[0].GetText()));
-        var rightExpression = new Number(double.Parse(context.expression()[1].GetText()));
-
-        return leftExpression.Subtract(rightExpression).ToString() ?? string.Empty;
-    }
-
-    public override string VisitMultiplyExpression([NotNull] RplParser.MultiplyExpressionContext context)
-    {
-        var leftExpression = new Number(double.Parse(context.expression()[0].GetText()));
-        var rightExpression = new Number(double.Parse(context.expression()[1].GetText()));
-
-        return leftExpression.Multiply(rightExpression).ToString() ?? string.Empty;
-    }
-
-    public override string VisitDivideExpression([NotNull] RplParser.DivideExpressionContext context)
-    {
-        var leftExpression = new Number(double.Parse(context.expression()[0].GetText()));
-        var rightExpression = new Number(double.Parse(context.expression()[1].GetText()));
-
-        return leftExpression.Divide(rightExpression).ToString() ?? string.Empty;
-    }
-
-    public override string VisitModulusExpression([NotNull] RplParser.ModulusExpressionContext context)
-    {
-        var leftExpression = new Number(double.Parse(context.expression()[0].GetText()));
-        var rightExpression = new Number(double.Parse(context.expression()[1].GetText()));
-
-        return leftExpression.Modulus(rightExpression).ToString() ?? string.Empty;
+        return this.expressionVisitor.Visit(context.expression()).ToString() ?? string.Empty;
     }
 }
