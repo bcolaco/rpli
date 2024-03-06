@@ -14,7 +14,8 @@ string
     ;
 
 inlineExpr
-    : EXPR_SYMBOL # SymbolExpression
+    : EXPR_NUMBER # NumberExpression
+    | EXPR_SYMBOL # SymbolExpression
     | string      # StringExpression
     ;
 

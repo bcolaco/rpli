@@ -16,6 +16,7 @@ class Visitor : RplParserBaseVisitor<string>
         switch(node.Symbol.Type)
         {
             case RplLexer.CONTENT:
+            case RplLexer.EXPR_NUMBER:
             case RplLexer.EXPR_SYMBOL:
             case RplLexer.DQS_CONTENT:
             case RplLexer.SQS_CONTENT:
