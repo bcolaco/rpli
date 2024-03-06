@@ -2,7 +2,9 @@ parser grammar RplParser;
 
 options { tokenVocab=RplLexer; }
 
-template: element* EOF;
+template: elements EOF;
+
+elements: element*;
 
 element
     : CONTENT+                                         # ContentElement
@@ -10,9 +12,20 @@ element
     | INTERPOLATION_START expression EXPR_EXIT_R_BRACE # ExpressionElement
     ;
 
-directive: directiveAssign;
+directive
+    : directiveAssign
+    | directiveIf;
 
 directiveAssign: START_DIRECTIVE_TAG EXPR_ASSIGN EXPR_SYMBOL EXPR_EQ expression EXPR_EXIT_DIV_GT;
+
+directiveIf
+    : START_DIRECTIVE_TAG EXPR_IF expression EXPR_EXIT_GT directiveIfTrueElements
+      (START_DIRECTIVE_TAG EXPR_ELSE EXPR_EXIT_GT directiveIfElseElements)?
+      END_DIRECTIVE_TAG EXPR_IF EXPR_EXIT_GT
+    ;
+
+directiveIfTrueElements: elements;
+directiveIfElseElements: elements;
 
 string
     : single_quote_string # SingleQuote

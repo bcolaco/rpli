@@ -36,4 +36,24 @@ class TempalteVisitor(IDictionary<string, Value> Namespace) : RplParserBaseVisit
         Namespace[name] = value;
         return base.VisitDirectiveAssign(context);
     }
+
+    public override string VisitDirectiveIf([NotNull] RplParser.DirectiveIfContext context)
+    {
+        var expressionValue = this.expressionVisitor.Visit(context.expression());
+
+        if (expressionValue is not Boolean booleanExpression)
+            throw new Exception();
+
+        if (booleanExpression.Value == true)
+            return this.Visit(context.directiveIfTrueElements());
+        else
+        {
+            var directiveElseElements = context.directiveIfElseElements();
+
+            if (directiveElseElements is not null)
+                return this.Visit(directiveElseElements);
+        }
+
+        return string.Empty;
+    }
 }
