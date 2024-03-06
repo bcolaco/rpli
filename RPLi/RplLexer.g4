@@ -17,6 +17,7 @@ SQS_CONTENT : (~[\\$'])+;
 mode EXPR_MODE;
 EXPR_ASSIGN           : 'assign';
 EXPR_ELSE             : 'else';
+EXPR_ELSEIF           : 'elseif';
 EXPR_FALSE            : 'false';
 EXPR_IF               : 'if';
 EXPR_TRUE             : 'true';

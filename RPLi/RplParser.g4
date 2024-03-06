@@ -19,12 +19,16 @@ directive
 directiveAssign: START_DIRECTIVE_TAG EXPR_ASSIGN EXPR_SYMBOL EXPR_EQ expression EXPR_EXIT_DIV_GT;
 
 directiveIf
-    : START_DIRECTIVE_TAG EXPR_IF expression EXPR_EXIT_GT directiveIfTrueElements
+    : START_DIRECTIVE_TAG EXPR_IF directiveIfExpression EXPR_EXIT_GT directiveIfTrueElements
+      (START_DIRECTIVE_TAG EXPR_ELSEIF directiveIfElseIfExpression EXPR_EXIT_GT directiveIfElseIfTrueElements)*
       (START_DIRECTIVE_TAG EXPR_ELSE EXPR_EXIT_GT directiveIfElseElements)?
       END_DIRECTIVE_TAG EXPR_IF EXPR_EXIT_GT
     ;
 
+directiveIfExpression: expression;
 directiveIfTrueElements: elements;
+directiveIfElseIfExpression: expression;
+directiveIfElseIfTrueElements: elements;
 directiveIfElseElements: elements;
 
 string
