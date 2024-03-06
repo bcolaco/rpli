@@ -27,6 +27,7 @@ EXPR_MULTIPLY         : '*';
 EXPR_DIVIDE           : '/';
 EXPR_MODULUS          : '%';
 EXPR_EQ               : '=';
+EXPR_LOGICAL_AND      : '&&';
 EXPR_NUMBER           : NUMBER;
 EXPR_SYMBOL           : SYMBOL;
 

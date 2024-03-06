@@ -52,33 +52,52 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
 
     public override Value VisitSubtractExpression([NotNull] RplParser.SubtractExpressionContext context)
     {
-        var leftExpression = this.Visit(context.expression()[0]);
-        var rightExpression = this.Visit(context.expression()[1]);
+        var left = this.GetValue<Number>(context.expression()[0]);
+        var right = this.GetValue<Number>(context.expression()[1]);
 
-        return leftExpression.Subtract(rightExpression);
+        return left.Subtract(right);
     }
 
     public override Value VisitMultiplyExpression([NotNull] RplParser.MultiplyExpressionContext context)
     {
-        var leftExpression = this.Visit(context.expression()[0]);
-        var rightExpression = this.Visit(context.expression()[1]);
+        var left = this.GetValue<Number>(context.expression()[0]);
+        var right = this.GetValue<Number>(context.expression()[1]);
 
-        return leftExpression.Multiply(rightExpression);
+        return left.Multiply(right);
     }
 
     public override Value VisitDivideExpression([NotNull] RplParser.DivideExpressionContext context)
     {
-        var leftExpression = this.Visit(context.expression()[0]);
-        var rightExpression = this.Visit(context.expression()[1]);
+        var left = this.GetValue<Number>(context.expression()[0]);
+        var right = this.GetValue<Number>(context.expression()[1]);
 
-        return leftExpression.Divide(rightExpression);
+        return left.Divide(right);
     }
 
     public override Value VisitModulusExpression([NotNull] RplParser.ModulusExpressionContext context)
     {
-        var leftExpression = this.Visit(context.expression()[0]);
-        var rightExpression = this.Visit(context.expression()[1]);
+        var left = this.GetValue<Number>(context.expression()[0]);
+        var right = this.GetValue<Number>(context.expression()[1]);
 
-        return leftExpression.Modulus(rightExpression);
+        return left.Modulus(right);
+    }
+
+    public override Value VisitLogicalAndExpression([NotNull] RplParser.LogicalAndExpressionContext context)
+    {
+        var left = this.GetValue<Boolean>(context.expression()[0]);
+        var right = this.GetValue<Boolean>(context.expression()[1]);
+
+        return left.And(right);
+    }
+
+    private T GetValue<T>(RplParser.ExpressionContext context)
+        where T: Value
+    {
+        var value = this.Visit(context);
+
+        if (value is not T typedValue)
+            throw new Exception($"Expected a {typeof(T).Name} but found a {value.GetType().Name}");
+
+        return typedValue;
     }
 }
