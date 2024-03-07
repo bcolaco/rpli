@@ -56,6 +56,7 @@ expression
     | expression EXPR_COMPARE_EQ expression   # EqualityExpression
     | expression EXPR_COMPARE_NEQ expression  # InequalityExpression
     | expression EXPR_LT_SYM expression       # LessThanExpression
+    | expression EXPR_LTE_SYM expression      # LessThanOrEqualExpression
     ;
 
 single_quote_string : EXPR_SINGLE_STR_START SQS_CONTENT SQS_EXIT;
