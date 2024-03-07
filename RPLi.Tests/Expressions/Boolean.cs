@@ -72,32 +72,48 @@ public class Boolean
         ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
     }
 
-    [Fact]
-    public void LessThan()
+    [Theory]
+    [InlineData("<")]
+    [InlineData("lt")]
+    public void LessThan(string op)
     {
         var ns = new Dictionary<string, Value>();
 
-        RPLi.Render("<#assign v = 1 < 2>", ns);
+        RPLi.Render($"<#assign v = 1 {op} 2>", ns);
+
+        ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
+    }
+
+    [Theory]
+    [InlineData("<=")]
+    [InlineData("lte")]
+    public void LessThanOrEqual(string op)
+    {
+        var ns = new Dictionary<string, Value>();
+
+        RPLi.Render($"<#assign v = 2 {op} 2>", ns);
 
         ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
     }
 
     [Fact]
-    public void LessThanOrEqual()
+    public void GreaterThan()
     {
         var ns = new Dictionary<string, Value>();
 
-        RPLi.Render("<#assign v = 2 <= 2>", ns);
+        RPLi.Render("<#assign v = 2 gt 1>", ns);
 
         ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
     }
 
-    [Fact]
-    public void GreaterThanOrEqual()
+    [Theory]
+    [InlineData(">=")]
+    [InlineData("gte")]
+    public void GreaterThanOrEqual(string op)
     {
         var ns = new Dictionary<string, Value>();
 
-        RPLi.Render("<#assign v = 2 >= 2>", ns);
+        RPLi.Render($"<#assign v = 2 {op} 2>", ns);
 
         ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
     }

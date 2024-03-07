@@ -55,9 +55,10 @@ expression
     | expression EXPR_LOGICAL_OR expression   # LogicalOrExpression
     | expression EXPR_COMPARE_EQ expression   # EqualityExpression
     | expression EXPR_COMPARE_NEQ expression  # InequalityExpression
-    | expression EXPR_LT_SYM expression       # LessThanExpression
-    | expression EXPR_LTE_SYM expression      # LessThanOrEqualExpression
-    | expression EXPR_GTE_SYM expression      # GreaterThanOrEqualExpression
+    | expression op=(EXPR_LT_SYM | EXPR_LT_STR) expression       # LessThanExpression
+    | expression op=(EXPR_LTE_SYM | EXPR_LTE_STR) expression     # LessThanOrEqualExpression
+    | expression EXPR_GT_STR expression                         # GreaterThanExpression
+    | expression po=(EXPR_GTE_SYM | EXPR_GTE_STR) expression     # GreaterThanOrEqualExpression
     ;
 
 single_quote_string : EXPR_SINGLE_STR_START SQS_CONTENT SQS_EXIT;

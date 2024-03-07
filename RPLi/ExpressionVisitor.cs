@@ -137,6 +137,14 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
         return left.LessThan(right).Or(left.Equal(right));
     }
 
+    public override Value VisitGreaterThanExpression([NotNull] RplParser.GreaterThanExpressionContext context)
+    {
+        var left = this.Visit(context.expression()[0]).As<Number>();
+        var right = this.Visit(context.expression()[1]).As<Number>();
+
+        return left.GreaterThan(right);
+    }
+
     public override Value VisitGreaterThanOrEqualExpression([NotNull] RplParser.GreaterThanOrEqualExpressionContext context)
     {
         var left = this.Visit(context.expression()[0]).As<Number>();
