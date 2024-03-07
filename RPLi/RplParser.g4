@@ -45,6 +45,7 @@ expression
     | EXPR_SYMBOL # SymbolExpression
     | string      # StringExpression
     | boolean     # BooleanExpression
+    | EXPR_BANG expression                    # NotExpression
     | expression EXPR_ADD expression          # AddExpression
     | expression EXPR_SUBTRACT expression     # SubtractExpression
     | expression EXPR_MULTIPLY expression     # MultiplyExpression

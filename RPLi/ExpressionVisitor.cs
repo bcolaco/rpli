@@ -98,6 +98,13 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
         return left.Or(right);
     }
 
+    public override Value VisitNotExpression([NotNull] RplParser.NotExpressionContext context)
+    {
+        var expression = this.GetValue<Boolean>(context.expression());
+
+        return expression.Not();
+    }
+
     private T GetValue<T>(RplParser.ExpressionContext context)
         where T: Value
     {

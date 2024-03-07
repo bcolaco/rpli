@@ -16,4 +16,9 @@ public record Boolean(bool Value) : Value
     {
         return new Boolean(this.Value || operand.Value);
     }
+
+    public Boolean Not()
+    {
+        return new Boolean(!this.Value);
+    }
 }
