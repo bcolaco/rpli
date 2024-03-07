@@ -37,6 +37,7 @@ EXPR_COMPARE_NEQ      : '!=';
 EXPR_BANG             : '!';
 EXPR_LOGICAL_AND      : '&&';
 EXPR_LOGICAL_OR       : '||';
+EXPR_LT_SYM           : '<';
 EXPR_WS               : [ \n]+ -> channel(2);
 EXPR_NUMBER           : NUMBER;
 EXPR_SYMBOL           : SYMBOL;

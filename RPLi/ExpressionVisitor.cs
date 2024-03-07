@@ -120,4 +120,12 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
 
         return left.Equal(right).Not();
     }
+
+    public override Value VisitLessThanExpression([NotNull] RplParser.LessThanExpressionContext context)
+    {
+        var left = this.Visit(context.expression()[0]).As<Number>();
+        var right = this.Visit(context.expression()[1]).As<Number>();
+
+        return left.LessThan(right);
+    }
 }

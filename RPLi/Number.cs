@@ -45,6 +45,14 @@ public record Number(double Value) : Value
         return Boolean.FromBoolean(numberValue.Value == this.Value);
     }
 
+    public Boolean LessThan(Number number)
+    {
+        if (this.Value < number.Value)
+            return Boolean.True;
+
+        return Boolean.False;
+    }
+
     public override string ToString()
     {
         return this.Value.ToString();
