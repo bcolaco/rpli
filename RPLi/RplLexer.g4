@@ -32,6 +32,7 @@ EXPR_MULTIPLY         : '*';
 EXPR_DIVIDE           : '/';
 EXPR_MODULUS          : '%';
 EXPR_EQ               : '=';
+EXPR_COMPARE_EQ       : '==';
 EXPR_BANG             : '!';
 EXPR_LOGICAL_AND      : '&&';
 EXPR_LOGICAL_OR       : '||';

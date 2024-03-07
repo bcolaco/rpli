@@ -51,4 +51,14 @@ public class Boolean
 
         ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
     }
+
+    [Fact]
+    public void Equality()
+    {
+        var ns = new Dictionary<string, Value>();
+
+        RPLi.Render("<#assign v = 1 == 1>", ns);
+
+        ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
+    }
 }

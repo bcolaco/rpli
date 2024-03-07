@@ -2,7 +2,7 @@ namespace RPLi;
 
 public record Number(double Value) : Value
 {
-    public Value Add(Value addend)
+    public override Value Add(Value addend)
     {
         if (addend is Number number) 
             return new Number(this.Value + number.Value);
@@ -35,6 +35,14 @@ public record Number(double Value) : Value
         if (divisor is Number number) 
             return new Number(this.Value % number.Value);
         throw new ArgumentException();
+    }
+
+    public override Boolean Equal(Value value)
+    {
+        if (value is not Number numberValue)
+            return Boolean.False;
+        
+        return Boolean.FromBoolean(numberValue.Value == this.Value);
     }
 
     public override string ToString()

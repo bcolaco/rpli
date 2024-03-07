@@ -36,8 +36,8 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
     {
         return context.GetText() switch
         {
-            "true" => new Boolean(true),
-            "false" => new Boolean(false),
+            "true" => Boolean.True,
+            "false" => Boolean.False,
             _ => throw new NotImplementedException(),
         };
     }
@@ -52,67 +52,64 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
 
     public override Value VisitSubtractExpression([NotNull] RplParser.SubtractExpressionContext context)
     {
-        var left = this.GetValue<Number>(context.expression()[0]);
-        var right = this.GetValue<Number>(context.expression()[1]);
+        var left = this.Visit(context.expression()[0]).As<Number>();
+        var right = this.Visit(context.expression()[1]).As<Number>();
 
         return left.Subtract(right);
     }
 
     public override Value VisitMultiplyExpression([NotNull] RplParser.MultiplyExpressionContext context)
     {
-        var left = this.GetValue<Number>(context.expression()[0]);
-        var right = this.GetValue<Number>(context.expression()[1]);
+        var left = this.Visit(context.expression()[0]).As<Number>();
+        var right = this.Visit(context.expression()[1]).As<Number>();
 
         return left.Multiply(right);
     }
 
     public override Value VisitDivideExpression([NotNull] RplParser.DivideExpressionContext context)
     {
-        var left = this.GetValue<Number>(context.expression()[0]);
-        var right = this.GetValue<Number>(context.expression()[1]);
+        var left = this.Visit(context.expression()[0]).As<Number>();
+        var right = this.Visit(context.expression()[1]).As<Number>();
 
         return left.Divide(right);
     }
 
     public override Value VisitModulusExpression([NotNull] RplParser.ModulusExpressionContext context)
     {
-        var left = this.GetValue<Number>(context.expression()[0]);
-        var right = this.GetValue<Number>(context.expression()[1]);
+        var left = this.Visit(context.expression()[0]).As<Number>();
+        var right = this.Visit(context.expression()[1]).As<Number>();
 
         return left.Modulus(right);
     }
 
     public override Value VisitLogicalAndExpression([NotNull] RplParser.LogicalAndExpressionContext context)
     {
-        var left = this.GetValue<Boolean>(context.expression()[0]);
-        var right = this.GetValue<Boolean>(context.expression()[1]);
+        var left = this.Visit(context.expression()[0]).As<Boolean>();
+        var right = this.Visit(context.expression()[1]).As<Boolean>();
 
         return left.And(right);
     }
 
     public override Value VisitLogicalOrExpression([NotNull] RplParser.LogicalOrExpressionContext context)
     {
-        var left = this.GetValue<Boolean>(context.expression()[0]);
-        var right = this.GetValue<Boolean>(context.expression()[1]);
+        var left = this.Visit(context.expression()[0]).As<Boolean>();
+        var right = this.Visit(context.expression()[1]).As<Boolean>();
 
         return left.Or(right);
     }
 
     public override Value VisitNotExpression([NotNull] RplParser.NotExpressionContext context)
     {
-        var expression = this.GetValue<Boolean>(context.expression());
+        var expression = this.Visit(context.expression()).As<Boolean>();
 
         return expression.Not();
     }
 
-    private T GetValue<T>(RplParser.ExpressionContext context)
-        where T: Value
+    public override Value VisitCompareExpression([NotNull] RplParser.CompareExpressionContext context)
     {
-        var value = this.Visit(context);
+        var left = this.Visit(context.expression()[0]);
+        var right = this.Visit(context.expression()[1]);
 
-        if (value is not T typedValue)
-            throw new Exception($"Expected a {typeof(T).Name} but found a {value.GetType().Name}");
-
-        return typedValue;
+        return left.Equal(right);
     }
 }
