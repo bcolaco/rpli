@@ -105,11 +105,19 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
         return expression.Not();
     }
 
-    public override Value VisitCompareExpression([NotNull] RplParser.CompareExpressionContext context)
+    public override Value VisitEqualityExpression([NotNull] RplParser.EqualityExpressionContext context)
     {
         var left = this.Visit(context.expression()[0]);
         var right = this.Visit(context.expression()[1]);
 
         return left.Equal(right);
+    }
+
+    public override Value VisitInequalityExpression([NotNull] RplParser.InequalityExpressionContext context)
+    {
+        var left = this.Visit(context.expression()[0]);
+        var right = this.Visit(context.expression()[1]);
+
+        return left.Equal(right).Not();
     }
 }

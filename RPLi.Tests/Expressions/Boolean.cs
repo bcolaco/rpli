@@ -61,4 +61,14 @@ public class Boolean
 
         ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
     }
+
+    [Fact]
+    public void Inequality()
+    {
+        var ns = new Dictionary<string, Value>();
+
+        RPLi.Render("<#assign v = 1 != 2>", ns);
+
+        ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
+    }
 }

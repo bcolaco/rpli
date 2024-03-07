@@ -53,7 +53,8 @@ expression
     | expression EXPR_MODULUS expression      # ModulusExpression
     | expression EXPR_LOGICAL_AND expression  # LogicalAndExpression
     | expression EXPR_LOGICAL_OR expression   # LogicalOrExpression
-    | expression EXPR_COMPARE_EQ expression   # CompareExpression
+    | expression EXPR_COMPARE_EQ expression   # EqualityExpression
+    | expression EXPR_COMPARE_NEQ expression   # InequalityExpression
     ;
 
 single_quote_string : EXPR_SINGLE_STR_START SQS_CONTENT SQS_EXIT;
