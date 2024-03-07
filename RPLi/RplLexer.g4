@@ -31,6 +31,8 @@ EXPR_SUBTRACT         : '-';
 EXPR_MULTIPLY         : '*';
 EXPR_DIVIDE           : '/';
 EXPR_MODULUS          : '%';
+EXPR_L_PAREN          : '(';
+EXPR_R_PAREN          : ')';
 EXPR_EQ               : '=';
 EXPR_COMPARE_EQ       : '==';
 EXPR_COMPARE_NEQ      : '!=';

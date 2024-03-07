@@ -31,4 +31,16 @@ public class Aritmetic
     {
         RPLi.Render("${3%2}").ShouldBe("1");
     }
+
+    [Fact]
+    public void MultiplicationPriority()
+    {
+        RPLi.Render("${1+2*3}").ShouldBe("7");
+    }
+
+    [Fact]
+    public void ParenthesisPriority()
+    {
+        RPLi.Render("${(1+2)*3}").ShouldBe("9");
+    }
 }

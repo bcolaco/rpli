@@ -45,11 +45,12 @@ expression
     | EXPR_SYMBOL # SymbolExpression
     | string      # StringExpression
     | boolean     # BooleanExpression
+    | EXPR_L_PAREN expression EXPR_R_PAREN    # ParenthesisExpression
     | EXPR_BANG expression                    # NotExpression
+    | expression EXPR_DIVIDE expression       # DivideExpression
+    | expression EXPR_MULTIPLY expression     # MultiplyExpression
     | expression EXPR_ADD expression          # AddExpression
     | expression EXPR_SUBTRACT expression     # SubtractExpression
-    | expression EXPR_MULTIPLY expression     # MultiplyExpression
-    | expression EXPR_DIVIDE expression       # DivideExpression
     | expression EXPR_MODULUS expression      # ModulusExpression
     | expression EXPR_LOGICAL_AND expression  # LogicalAndExpression
     | expression EXPR_LOGICAL_OR expression   # LogicalOrExpression
@@ -57,7 +58,7 @@ expression
     | expression EXPR_COMPARE_NEQ expression  # InequalityExpression
     | expression op=(EXPR_LT_SYM | EXPR_LT_STR) expression       # LessThanExpression
     | expression op=(EXPR_LTE_SYM | EXPR_LTE_STR) expression     # LessThanOrEqualExpression
-    | expression EXPR_GT_STR expression                         # GreaterThanExpression
+    | expression EXPR_GT_STR expression                          # GreaterThanExpression
     | expression po=(EXPR_GTE_SYM | EXPR_GTE_STR) expression     # GreaterThanOrEqualExpression
     ;
 

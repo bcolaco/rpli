@@ -152,4 +152,9 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
 
         return left.GreaterThan(right).Or(left.Equal(right));
     }
+
+    public override Value VisitParenthesisExpression([NotNull] RplParser.ParenthesisExpressionContext context)
+    {
+        return this.Visit(context.expression());
+    }
 }
