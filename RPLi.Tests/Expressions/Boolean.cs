@@ -91,4 +91,14 @@ public class Boolean
 
         ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
     }
+
+    [Fact]
+    public void GreaterThanOrEqual()
+    {
+        var ns = new Dictionary<string, Value>();
+
+        RPLi.Render("<#assign v = 2 >= 2>", ns);
+
+        ((global::RPLi.Boolean)ns["v"]).Value.ShouldBe(true);
+    }
 }

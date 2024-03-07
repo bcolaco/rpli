@@ -53,6 +53,14 @@ public record Number(double Value) : Value
         return Boolean.False;
     }
 
+    public Boolean GreaterThan(Number number)
+    {
+        if (this.Value > number.Value)
+            return Boolean.True;
+
+        return Boolean.False;
+    }
+
     public override string ToString()
     {
         return this.Value.ToString();
