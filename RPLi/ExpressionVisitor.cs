@@ -157,4 +157,14 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
     {
         return this.Visit(context.expression());
     }
+
+    public override Value VisitSequenceExpression([NotNull] RplParser.SequenceExpressionContext context)
+    {
+        var elements = new List<Value>();
+
+        foreach (var elementExpression in context.expression() ?? [])
+            elements.Add(this.Visit(elementExpression));
+
+        return new Sequence([.. elements]);
+    }
 }

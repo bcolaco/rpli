@@ -60,6 +60,7 @@ expression
     | expression op=(EXPR_LTE_SYM | EXPR_LTE_STR) expression     # LessThanOrEqualExpression
     | expression EXPR_GT_STR expression                          # GreaterThanExpression
     | expression po=(EXPR_GTE_SYM | EXPR_GTE_STR) expression     # GreaterThanOrEqualExpression
+    | EXPR_L_SQ_PAREN (expression (EXPR_COMMA expression)*)? EXPR_R_SQ_PAREN # SequenceExpression
     ;
 
 single_quote_string : EXPR_SINGLE_STR_START SQS_CONTENT SQS_EXIT;
