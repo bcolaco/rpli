@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPLi", "RPLi\RPLi.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPLi.Tests", "RPLi.Tests\RPLi.Tests.csproj", "{AB5D560B-308F-45F3-8775-FE59197E0C4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Tests", "Example.Tests\Example.Tests.csproj", "{3DB75C21-3753-4FCC-BF9D-24FF56A49628}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{AB5D560B-308F-45F3-8775-FE59197E0C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB5D560B-308F-45F3-8775-FE59197E0C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB5D560B-308F-45F3-8775-FE59197E0C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB75C21-3753-4FCC-BF9D-24FF56A49628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB75C21-3753-4FCC-BF9D-24FF56A49628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB75C21-3753-4FCC-BF9D-24FF56A49628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB75C21-3753-4FCC-BF9D-24FF56A49628}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
