@@ -7,9 +7,9 @@ template: elements EOF;
 elements: element*;
 
 element
-    : CONTENT+                                         # ContentElement
-    | directive                                        # DirectiveElement
-    | INTERPOLATION_START expression EXPR_EXIT_R_BRACE # ExpressionElement
+    : CONTENT+                                    # ContentElement
+    | directive                                   # DirectiveElement
+    | INTERPOLATION_START expression EXPR_R_BRACE # ExpressionElement
     ;
 
 directive
@@ -57,6 +57,7 @@ expression
     | EXPR_SYMBOL # SymbolExpression
     | string      # StringExpression
     | boolean     # BooleanExpression
+    | expression EXPR_DOT EXPR_SYMBOL         # DotAccessExpression
     | EXPR_L_PAREN expression EXPR_R_PAREN    # ParenthesisExpression
     | EXPR_BANG expression                    # NotExpression
     | expression EXPR_DIVIDE expression       # DivideExpression
@@ -73,7 +74,12 @@ expression
     | expression EXPR_GT_STR expression                          # GreaterThanExpression
     | expression po=(EXPR_GTE_SYM | EXPR_GTE_STR) expression     # GreaterThanOrEqualExpression
     | EXPR_L_SQ_PAREN (expression (EXPR_COMMA expression)*)? EXPR_R_SQ_PAREN # SequenceExpression
+    | EXPR_L_BRACE (keyValueExpression (EXPR_COMMA keyValueExpression)*)? EXPR_R_BRACE # HashExpression
     ;
+
+keyValueExpression: keyExpression EXPR_COLON valueExpression;
+keyExpression: expression;
+valueExpression: expression;
 
 single_quote_string : EXPR_SINGLE_STR_START SQS_CONTENT SQS_EXIT;
 

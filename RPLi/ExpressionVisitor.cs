@@ -168,4 +168,27 @@ class ExpressionVisitor(IDictionary<string, Value> Namespace) : RplParserBaseVis
 
         return new Sequence([.. elements]);
     }
+
+    public override Value VisitHashExpression([NotNull] RplParser.HashExpressionContext context)
+    {
+        var keyValues = new Dictionary<string, Value>();
+        
+        foreach (var keyValue in context.keyValueExpression())
+        {
+            var key = this.Visit(keyValue.keyExpression())?.As<String>().Value ?? string.Empty;
+            var value = this.Visit(keyValue.valueExpression());
+
+            keyValues.Add(key, value);
+        }
+
+        return new Hash(keyValues);
+    }
+
+    public override Value VisitDotAccessExpression([NotNull] RplParser.DotAccessExpressionContext context)
+    {
+        var hash = this.Visit(context.expression()).As<Hash>();
+        var key = context.EXPR_SYMBOL().GetText();
+
+        return hash.Values[key];
+    }
 }
