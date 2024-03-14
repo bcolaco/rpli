@@ -14,9 +14,10 @@ element
 
 directive
     : directiveAssign
-    | directiveIf;
+    | directiveIf
+    | directiveList;
 
-directiveAssign: START_DIRECTIVE_TAG EXPR_ASSIGN EXPR_SYMBOL EXPR_EQ expression EXPR_EXIT_DIV_GT;
+directiveAssign: START_DIRECTIVE_TAG EXPR_ASSIGN EXPR_SYMBOL EXPR_EQ expression (EXPR_EXIT_GT | EXPR_EXIT_DIV_GT);
 
 directiveIf
     : START_DIRECTIVE_TAG EXPR_IF directiveIfExpression EXPR_EXIT_GT directiveIfTrueElements
@@ -30,6 +31,14 @@ directiveIfTrueElements: elements;
 directiveIfElseIfExpression: expression;
 directiveIfElseIfTrueElements: elements;
 directiveIfElseElements: elements;
+
+directiveList
+    : START_DIRECTIVE_TAG EXPR_LIST expression EXPR_AS EXPR_SYMBOL EXPR_EXIT_GT
+      directiveListElements
+      END_DIRECTIVE_TAG EXPR_LIST EXPR_EXIT_GT
+    ;
+
+directiveListElements: elements;
 
 string
     : single_quote_string # SingleQuote

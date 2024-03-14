@@ -1,5 +1,6 @@
 namespace RPLi;
 
+using System.IO;
 using System.Text.RegularExpressions;
 using Antlr4.Runtime;
 using Lextm.AnsiC;
@@ -17,9 +18,18 @@ public class RPLi
         var lexer = new RplLexer(inputStream);
         var tokenStream = new CommonTokenStream(lexer);
         var parser = new RplParser(tokenStream);
+        parser.AddErrorListener(new ErrorListener());
         var visitor = new TempalteVisitor(ns);
         rpl = visitor.Visit(parser.template());
 
         return rpl;
+    }
+
+    class ErrorListener : IAntlrErrorListener<IToken>
+    {
+        public void SyntaxError(TextWriter output, IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
+        {
+            throw new Exception(msg);
+        }
     }
 }

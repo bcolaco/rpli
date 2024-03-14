@@ -4,7 +4,7 @@ using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using Lextm.AnsiC;
 
-class ExpressionVisitor : RplParserBaseVisitor<Value>
+class ExpressionVisitor(IDictionary<string, Value> Namespace) : RplParserBaseVisitor<Value>
 {
     protected override Value AggregateResult(Value aggregate, Value nextResult)
     {
@@ -19,6 +19,7 @@ class ExpressionVisitor : RplParserBaseVisitor<Value>
         switch(node.Symbol.Type)
         {
             case RplLexer.EXPR_SYMBOL:
+                return Namespace[node.GetText()];
             case RplLexer.DQS_CONTENT:
             case RplLexer.SQS_CONTENT:
                 return new String(node.GetText());

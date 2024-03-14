@@ -15,11 +15,13 @@ SQS_EXIT    : '\'' -> popMode;
 SQS_CONTENT : (~[\\$'])+;
 
 mode EXPR_MODE;
+EXPR_AS               : 'as';
 EXPR_ASSIGN           : 'assign';
 EXPR_ELSE             : 'else';
 EXPR_ELSEIF           : 'elseif';
 EXPR_FALSE            : 'false';
 EXPR_IF               : 'if';
+EXPR_LIST             : 'list';
 EXPR_TRUE             : 'true';
 EXPR_EXIT_R_BRACE     : '}' -> popMode;
 EXPR_DOUBLE_STR_START : '"' -> pushMode(DOUBLE_QUOTE_STRING_MODE);

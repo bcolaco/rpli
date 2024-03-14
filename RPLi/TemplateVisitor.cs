@@ -1,12 +1,13 @@
 namespace RPLi;
 
+using System.Text;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using Lextm.AnsiC;
 
 class TempalteVisitor(IDictionary<string, Value> Namespace) : RplParserBaseVisitor<string>
 {
-    private readonly ExpressionVisitor expressionVisitor = new ExpressionVisitor();
+    private readonly ExpressionVisitor expressionVisitor = new ExpressionVisitor(Namespace);
     
     protected override string AggregateResult(string aggregate, string nextResult)
     {
@@ -65,5 +66,28 @@ class TempalteVisitor(IDictionary<string, Value> Namespace) : RplParserBaseVisit
             return this.Visit(directiveElseElements);
 
         return string.Empty;
+    }
+
+    public override string VisitDirectiveList([NotNull] RplParser.DirectiveListContext context)
+    {
+        var sequence = this.expressionVisitor.Visit(context.expression()).As<Sequence>();
+        var item = context.EXPR_SYMBOL().GetText();
+        var elements = context.directiveListElements();
+
+        if (elements is null)
+            return string.Empty;
+        
+        var result = new StringBuilder();
+        var itemIdex = 0;
+        var elementCount = sequence.Values.Length;
+        foreach (var element in sequence.Values)
+        {
+            Namespace[item] = element;
+            Namespace[$"{item}_index"] = new Number(itemIdex++);
+            Namespace[$"{item}_has_next"] = new Boolean(itemIdex < elementCount);
+            result.Append(this.Visit(elements));
+        }
+
+        return result.ToString();
     }
 }
