@@ -20,9 +20,9 @@ public class RPLi
         var parser = new RplParser(tokenStream);
         parser.AddErrorListener(new ErrorListener());
         var visitor = new TempalteVisitor(ns);
-        rpl = visitor.Visit(parser.template());
+        var result = visitor.Visit(parser.template());
 
-        return rpl;
+        return result.Text;
     }
 
     class ErrorListener : IAntlrErrorListener<IToken>

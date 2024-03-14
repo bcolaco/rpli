@@ -33,4 +33,12 @@ public class List
         
         document.ShouldBe("a,b,c");
     }
+
+    [Fact]
+    public void BreakDirectiveBreaks()
+    {
+        var document = RPLi.Render("<#list ['a', 'b', 'c'] as x>${x}<#if x == 'b'><#break></#if></#list>");
+        
+        document.ShouldBe("ab");
+    }
 }

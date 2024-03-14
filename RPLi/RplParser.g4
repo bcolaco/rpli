@@ -14,6 +14,7 @@ element
 
 directive
     : directiveAssign
+    | directiveBreak
     | directiveIf
     | directiveList;
 
@@ -39,6 +40,8 @@ directiveList
     ;
 
 directiveListElements: elements;
+
+directiveBreak: START_DIRECTIVE_TAG EXPR_BREAK EXPR_EXIT_GT;
 
 string
     : single_quote_string # SingleQuote
